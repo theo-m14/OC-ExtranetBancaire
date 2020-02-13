@@ -18,3 +18,8 @@ h1 {
 .footer a {
   color: black;
 }
+
+.form_login {
+  text-align: center;
+  height: 20rem;
+}
