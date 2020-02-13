@@ -1,3 +1,11 @@
+<?php
+session_start();
+try {           //Récupération BDD
+	$bdd = new PDO('mysql:host=localhost;dbname=extranet_gbaf;charset=utf8', 'root', '', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
+} catch (Exception $e) {
+	die('Erreur : ' . $e->getMessage());
+}                            ?>
+
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -9,7 +17,9 @@
 </head>
 
 <body>
-	<?php include("header.php"); ?>
+	<?php include("header.php");
+
+	?>
 	<div class="presentation">
 		<h1>Le GBAF et son Extranet</h1>
 		<p>
@@ -31,7 +41,7 @@
 	<div class="acteurs_partenaire">
 
 	</div>
-
+	<?php include("footer.php") ?>
 </body>
 
 </html>
