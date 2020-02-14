@@ -37,6 +37,9 @@ try {           //Récupération BDD
 				<input type="password" name="pass" id="password"></br>
 				<input type="submit" value="Valider">
 		</div>
+		<div class="inscription">
+			<p>Pas encore de compte ?<a href="register.php">Inscription</a></p>
+		</div>
 
 	<?php
 	} else {  //Si la session existe on affiche le site

@@ -3,6 +3,8 @@
 		<img src="img/gbaf.png" class="logo_gbaf">
 	</div>
 	<div class="user_spec">
-		<p>First Name : Last Name </p>
+		<?php if (isset($_SESSION['username'])) { ?>
+			<p>First Name : Last Name </p>
+		<?php } ?>
 	</div>
 </div>
