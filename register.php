@@ -41,6 +41,7 @@ try {           //Récupération BDD
         <input type="text" name="secur_response" id="reponse"><br>
         <input type="submit" value="Valider">
     </form>
+    <p>Déja un compte ? <a href="index.php">Connexion</a></p>
     <?php include('footer.php'); ?>
 </body>
 
