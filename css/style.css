@@ -20,6 +20,11 @@ h1 {
 }
 
 .form_login {
+  margin-top: 5rem;
   text-align: center;
-  height: 20rem;
+  height: 10rem;
+}
+
+.inscription {
+  text-align: center;
 }
