@@ -18,11 +18,17 @@ try {           //Récupération BDD
 
 <body>
 	<?php include("header.php");
-	if (isset($_POST['username']))  //Si on vient d'envoyer le login
+	if (isset($_POST['login']))  //Si on vient d'envoyer le login
 	{
+		echo "<h1>test</h1>";
 		//Vérification correspondance login / mdp
-		//if(id_user.mdp = post_mdp){ $_SESSION['username']=$_POST['username']}
+		$user = $bdd->prepare("SELECT * FROM users WHERE username='?' ");
+		$user->execute(array($_POST['login']));
+		$currentuser = $user->fetch();
+		echo '<p>' . $currentuser['question'] . '</p>';
+		//if($_POST['username'] = post_mdp){ $_SESSION['username']=$_POST['username']}
 		//else{ "mdp incorrect" }
+
 	}
 
 	if (!isset($_SESSION['username']))  //Si aucune session n'est enregistré

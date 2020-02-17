@@ -41,15 +41,15 @@ $pseudo_dispo = true;
                     'question' => $_POST['secur_question'],
                     'reponse' => $_POST['secur_response']
                 ));
+                header('Location: http://localhost/oc-extranetbancaire/');
+                exit();
             }
-            // header('Location: http://www.votresite.com/pageprotegee.php');
-            // exit();
         }
     }
     ?>
 
     <h2>Inscription à l'extranet GBAF</h2>
-    <form action="register.php">
+    <form action="register.php" method="POST">
         <label for="register_identifiant">Pseudonyme</label>
         <input type="text" name="register_login" id="register_identifiant"></br><br>
         <label for="password">Mot de passe</label>
