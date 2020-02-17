@@ -1,9 +1,13 @@
 <?php
 session_start();
+if (isset($_POST['logout']) && $_POST['logout'] == "true") {
+	session_destroy();
+	session_start();
+}
+
 include("src/bdd/bddcall.php");
 $bdd = bddcall();
 ?>
-
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -20,13 +24,15 @@ $bdd = bddcall();
 	{
 		echo "<h1>test</h1>";
 		//Vérification correspondance login / mdp
-		$user = $bdd->prepare("SELECT * FROM account WHERE username='?' ");
+		$user = $bdd->prepare("SELECT * FROM account WHERE username=? ");
 		$user->execute(array($_POST['login']));
 		$currentuser = $user->fetch();
-		echo '<p>' . $currentuser['question'] . '</p>';
-		//if($_POST['username'] = post_mdp){ $_SESSION['username']=$_POST['username']}
-		//else{ "mdp incorrect" }
-
+		echo '<p>La question est:' . $currentuser['password'] . '</p>';
+		if (password_verify($_POST['pass'], $currentuser['password'])) {
+			$_SESSION['username'] = $_POST['login'];
+		} else {
+			echo "<h2>Mot de passe ou Pseudonyme incorrect</h2>";
+		}
 	}
 
 	if (!isset($_SESSION['username']))  //Si aucune session n'est enregistré
