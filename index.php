@@ -1,10 +1,8 @@
 <?php
 session_start();
-try {           //Récupération BDD
-	$bdd = new PDO('mysql:host=localhost;dbname=extranet_gbaf;charset=utf8', 'root', '', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
-} catch (Exception $e) {
-	die('Erreur : ' . $e->getMessage());
-}                            ?>
+include("src/bdd/bddcall.php");
+$bdd = bddcall();
+?>
 
 <!DOCTYPE html>
 <html lang="fr">
@@ -22,7 +20,7 @@ try {           //Récupération BDD
 	{
 		echo "<h1>test</h1>";
 		//Vérification correspondance login / mdp
-		$user = $bdd->prepare("SELECT * FROM users WHERE username='?' ");
+		$user = $bdd->prepare("SELECT * FROM account WHERE username='?' ");
 		$user->execute(array($_POST['login']));
 		$currentuser = $user->fetch();
 		echo '<p>' . $currentuser['question'] . '</p>';
@@ -44,7 +42,7 @@ try {           //Récupération BDD
 				<input type="submit" value="Valider">
 		</div>
 		<div class="inscription">
-			<p>Pas encore de compte ?<a href="register.php">Inscription</a></p>
+			<p>Pas encore de compte ?<a href="src/register.php">Inscription</a></p>
 		</div>
 
 	<?php
