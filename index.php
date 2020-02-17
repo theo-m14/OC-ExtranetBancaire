@@ -42,7 +42,7 @@ $bdd = bddcall();
 				<input type="submit" value="Valider">
 		</div>
 		<div class="inscription">
-			<p>Pas encore de compte ?<a href="src/register.php">Inscription</a></p>
+			<p>Pas encore de compte ?<a href="register.php">Inscription</a></p>
 		</div>
 
 	<?php
