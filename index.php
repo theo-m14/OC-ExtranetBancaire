@@ -19,20 +19,22 @@ $bdd = bddcall();
 </head>
 
 <body>
-	<?php include("views/header.php");
+	<?php
 	if (isset($_POST['login']))  //Si on vient d'envoyer le login
 	{
-		echo "<h1>test</h1>";
 		//Vérification correspondance login / mdp
 		$user = $bdd->prepare("SELECT * FROM account WHERE username=? ");
 		$user->execute(array($_POST['login']));
 		$currentuser = $user->fetch();
-		echo '<p>La question est:' . $currentuser['password'] . '</p>';
 		if (password_verify($_POST['pass'], $currentuser['password'])) {
 			$_SESSION['username'] = $_POST['login'];
+			include("views/header.php");   //Affichage du header après l'enregistrement de session ( Affichage nom prenom)
 		} else {
+			include("views/header.php");
 			echo "<h2>Mot de passe ou Pseudonyme incorrect</h2>";
 		}
+	} else {
+		include("views/header.php");
 	}
 
 	if (!isset($_SESSION['username']))  //Si aucune session n'est enregistré

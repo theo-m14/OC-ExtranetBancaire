@@ -3,8 +3,10 @@
 		<img src="./public/img/gbaf.png" class="logo_gbaf">
 	</div>
 	<div class="user_spec">
-		<?php if (isset($_SESSION['username'])) { ?>
-			<p>First Name : Last Name </p>
+		<?php if (isset($_SESSION['username'])) {
+			$userinfo = log_user($bdd, $_SESSION['username']);
+		?>
+			<p><?php echo $userinfo['nom'] . " : " . $userinfo['prenom'] ?></p>
 			<form method="post">
 				<input type="hidden" name="logout" value="true">
 				<input type="submit" value="Déconnexion">

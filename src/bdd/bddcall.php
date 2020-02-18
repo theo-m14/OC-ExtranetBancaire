@@ -15,3 +15,10 @@ function registeruser($bdd)
                                 VALUES(:nom, :prenom, :username, :password, :question, :reponse)');
     return $enregistrement_utilisateur;
 }
+
+function log_user($bdd, $username)
+{
+    $log_user = $bdd->query("SELECT * FROM account WHERE username='$username'");
+    $info_user = $log_user->fetch();
+    return $info_user;
+}
