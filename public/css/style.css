@@ -53,6 +53,7 @@ h2 {
 
 .logoactor {
   width: 480px;
+  height: 148px;
   display: block;
   margin-left: auto;
   margin-right: auto;
@@ -63,4 +64,47 @@ h2 {
   text-align: right;
   margin-right: 2%;
   margin-bottom: 2%;
+}
+.acteurs_partenaire {
+  margin-right: 2%;
+  margin-left: 2%;
+}
+
+.actordisplay {
+  margin-bottom: 3%;
+  border-width: 0.2rem;
+  border-style: solid;
+}
+
+.actordisplay h3 {
+  margin: auto;
+}
+.actordesc {
+  margin-left: 2%;
+}
+@media (min-width: 768px) {
+  .actordisplay {
+    display: flex;
+  }
+
+  .logoactor {
+    margin-right: 8px;
+  }
+
+  .actorpage {
+    width: 170px;
+    margin-bottom: 0;
+    margin: auto;
+    margin-right: 2%;
+  }
+
+  .actordesc {
+    margin: auto;
+  }
+}
+
+@media (min-width: 1024px) {
+  .actordesc {
+    display: flex;
+  }
 }
