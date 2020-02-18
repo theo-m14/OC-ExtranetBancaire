@@ -22,3 +22,9 @@ function log_user($bdd, $username)
     $info_user = $log_user->fetch();
     return $info_user;
 }
+
+function catchallactor($bdd)
+{
+    $allactor = $bdd->query('SELECT * FROM acteur');
+    return $allactor;
+}

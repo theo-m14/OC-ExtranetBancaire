@@ -29,9 +29,11 @@ $bdd = bddcall();
 		if (password_verify($_POST['pass'], $currentuser['password'])) {
 			$_SESSION['username'] = $_POST['login'];
 			include("views/header.php");   //Affichage du header après l'enregistrement de session ( Affichage nom prenom)
+			$user->closeCursor();
 		} else {
 			include("views/header.php");
 			echo "<h2>Mot de passe ou Pseudonyme incorrect</h2>";
+			$user->closeCursor();
 		}
 	} else {
 		include("views/header.php");
@@ -75,6 +77,29 @@ $bdd = bddcall();
 			</p>
 		</div>
 		<div class="acteurs_partenaire">
+			<h2>Acteurs et Partenaire du Groupe GBAF</h2>
+			<?php
+			//Recupération des acteurs GBAF
+			$allactor = catchallactor($bdd);
+			$numberactor = $bdd->query("SELECT COUNT(*) AS Nbactor FROM acteur");
+			$number = $numberactor->fetch();
+			//Préparation de la description raccourcie
+			$descactor = $bdd->prepare("SELECT SUBSTRING(description,1,150) AS shortdesc FROM acteur WHERE nom=? ");
+			for ($i = 0; $i < $number['Nbactor']; $i++) {
+				$currentactor = $allactor->fetch();
+				$descactor->execute(array($currentactor['nom']));
+				$currentshortdesc = $descactor->fetch();
+			?>
+				<div class=actordisplay>
+					<img src="public/img/<?php echo $currentactor['logo']  ?>" alt="actorthumbnails" class="logoactor">
+					<h3> <?php echo $currentshortdesc['shortdesc'] . "..."; ?></h3>
+					<a href="#" class="actorpage">Lire la suite</a>
+				</div><?php
+						$descactor->closeCursor();
+					}
+					$allactor->closeCursor();
+					$numberactor->closeCursor();
+						?>
 
 		</div>
 
