@@ -184,6 +184,10 @@ h2 {
   justify-content: space-around;
 }
 
+.topbar_post form textarea {
+  margin-top: 5%;
+}
+
 .likebutton {
   height: 2rem;
   width: 2rem;
@@ -196,6 +200,14 @@ h2 {
   width: 2rem;
   background-image: url("../img/dislike.png");
   border: #cf1818 solid 0.2rem;
+}
+
+.likebutton:hover {
+  border-color: rgb(0, 0, 0);
+}
+
+.dislikebutton:hover {
+  border-color: rgb(0, 0, 0);
 }
 
 /* Breakpoint */

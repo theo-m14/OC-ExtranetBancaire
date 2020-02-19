@@ -7,6 +7,16 @@ if (!isset($_SESSION['username']) || !isset($_GET['id_acteur'])) {
 include("src/bdd/bddcall.php");
 $bdd = bddcall();
 $currentactor = currentactor($bdd, $_GET['id_acteur']);
+if (isset($_POST['newpost'])) {
+    $currentuser = log_user($bdd, $_SESSION['username']);
+    $post_register = $bdd->prepare('INSERT INTO post(id_acteur,id_user,post) 
+                        VALUES(:id_acteur, :id_user, :post)');
+    $post_register->execute(array(
+        'id_acteur' => $_GET['id_acteur'],
+        'id_user' => $currentuser['id_user'],
+        'post' => $_POST['newpost']
+    ));
+}
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -29,7 +39,7 @@ $currentactor = currentactor($bdd, $_GET['id_acteur']);
     </div>
     <div class="section_commentaire">
         <?php
-        $postcurrentactor = $bdd->prepare("SELECT COUNT(*) AS Nbpost FROM post WHERE id_acteur=?");
+        $postcurrentactor = $bdd->prepare("SELECT COUNT(*) AS Nbpost FROM post WHERE id_acteur=? ORDER BY date_add");
         $postcurrentactor->execute(array($currentactor['id_acteur']));
         $nbre_post = $postcurrentactor->fetch();
         $catchallactorpost = catchactorpost($bdd, $currentactor['id_acteur']); ?>
@@ -37,6 +47,7 @@ $currentactor = currentactor($bdd, $_GET['id_acteur']);
             <h3>Commentaires</h3>
             <form method="post">
                 <textarea name="newpost" placeholder="Entrer votre commentaire" rows="3" cols="35"></textarea>
+                <input type="submit" value="Envoyer">
                 <button name="like" class="likebutton"></button>
                 <button name="dislike" class="dislikebutton"></button>
             </form>
