@@ -77,7 +77,7 @@ $bdd = bddcall();
 			</p>
 		</div>
 		<div class="acteurs_partenaire">
-			<h2>Acteurs et Partenaire du Groupe GBAF</h2>
+			<h2>Acteurs et Partenaire du Groupe GBAF</h2><br>
 			<?php
 			//Recupération des acteurs GBAF
 			$allactor = catchallactor($bdd);
