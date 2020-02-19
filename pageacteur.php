@@ -32,7 +32,16 @@ $currentactor = currentactor($bdd, $_GET['id_acteur']);
         $postcurrentactor = $bdd->prepare("SELECT COUNT(*) AS Nbpost FROM post WHERE id_acteur=?");
         $postcurrentactor->execute(array($currentactor['id_acteur']));
         $nbre_post = $postcurrentactor->fetch();
-        $catchallactorpost = catchactorpost($bdd, $currentactor['id_acteur']);
+        $catchallactorpost = catchactorpost($bdd, $currentactor['id_acteur']); ?>
+        <div class="topbar_post">
+            <h3>Commentaires</h3>
+            <form method="post">
+                <textarea name="newpost" placeholder="Entrer votre commentaire" rows="3" cols="35"></textarea>
+                <button name="like" class="likebutton"></button>
+                <button name="dislike" class="dislikebutton"></button>
+            </form>
+        </div>
+        <?php
         for ($i = 0; $i < $nbre_post['Nbpost']; $i++) {
             $currentpost = $catchallactorpost->fetch();
             $prenom = getnameuserpost($bdd, $currentpost['id_user']); ?>
