@@ -97,7 +97,7 @@ $bdd = bddcall();
 					<img src="public/img/<?php echo $currentactor['logo']  ?>" alt="actorthumbnails" class="logoactor">
 					<div class="actordesc">
 						<h3> <?php echo $currentshortdesc['shortdesc'] . "..."; ?></h3>
-						<a href="#" class="actorpage">Lire la suite</a>
+						<a href="pageacteur.php?id_acteur=<?php echo $currentactor['id_acteur']; ?>" class="actorpage">Lire la suite</a>
 					</div>
 				</div><?php
 						$descactor->closeCursor();

@@ -28,3 +28,24 @@ function catchallactor($bdd)
     $allactor = $bdd->query('SELECT * FROM acteur');
     return $allactor;
 }
+
+function currentactor($bdd, $acteur_id)
+{
+    $actor = $bdd->query("SELECT * FROM acteur WHERE id_acteur='$acteur_id'");
+    $currentactor = $actor->fetch();
+    return $currentactor;
+}
+
+function catchactorpost($bdd, $acteur_id)
+{
+    $allactorpost = $bdd->query("SELECT * FROM post WHERE id_acteur='$acteur_id'");
+    return $allactorpost;
+}
+
+function getnameuserpost($bdd, $id_user)
+{
+    $user = $bdd->query("SELECT prenom FROM account WHERE id_user='$id_user'");
+    $currentuser = $user->fetch();
+    $prenom = $currentuser['prenom'];
+    return $prenom;
+}
