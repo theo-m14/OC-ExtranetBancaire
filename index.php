@@ -41,7 +41,9 @@ $bdd = bddcall();
 
 	if (!isset($_SESSION['username']))  //Si aucune session n'est enregistré
 	{
-
+		if (isset($_GET['recover']) && $_GET['recover'] == 1) {
+			echo "<h3 class='passmodified'>Mot de passe modifié!</h3>";
+		}
 	?>
 		<div class="form_login">
 			<form action="index.php" method="post">
@@ -51,6 +53,7 @@ $bdd = bddcall();
 				<input type="password" name="pass" id="password"></br>
 				<input type="submit" value="Valider">
 		</div>
+		<div class="recoverpass"><a href="recoverpass.php">Mot de passe oublié ?</a></div>
 		<div class="inscription">
 			<p>Pas encore de compte ?<a href="register.php">Inscription</a></p>
 		</div>

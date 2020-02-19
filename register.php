@@ -35,7 +35,7 @@ $pseudo_dispo = true;
                     'username' => $_POST['register_login'],
                     'password' => password_hash($_POST['pass'], PASSWORD_DEFAULT), //hacher le mdp
                     'question' => $_POST['secur_question'],
-                    'reponse' => $_POST['secur_response']
+                    'reponse' => password_hash($_POST['secur_response'], PASSWORD_DEFAULT),
                 ));
                 header('Location: http://localhost/oc-extranetbancaire/');
                 exit();
