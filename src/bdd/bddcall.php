@@ -38,7 +38,7 @@ function currentactor($bdd, $acteur_id)
 
 function catchactorpost($bdd, $acteur_id)
 {
-    $allactorpost = $bdd->query("SELECT * FROM post WHERE id_acteur='$acteur_id'");
+    $allactorpost = $bdd->query("SELECT * FROM post WHERE id_acteur='$acteur_id' ORDER BY id_post DESC");
     return $allactorpost;
 }
 

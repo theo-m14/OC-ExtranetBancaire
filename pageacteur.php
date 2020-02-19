@@ -39,7 +39,7 @@ if (isset($_POST['newpost'])) {
     </div>
     <div class="section_commentaire">
         <?php
-        $postcurrentactor = $bdd->prepare("SELECT COUNT(*) AS Nbpost FROM post WHERE id_acteur=? ORDER BY date_add");
+        $postcurrentactor = $bdd->prepare("SELECT COUNT(*) AS Nbpost FROM post WHERE id_acteur=?");
         $postcurrentactor->execute(array($currentactor['id_acteur']));
         $nbre_post = $postcurrentactor->fetch();
         $catchallactorpost = catchactorpost($bdd, $currentactor['id_acteur']); ?>
@@ -48,8 +48,16 @@ if (isset($_POST['newpost'])) {
             <form method="post">
                 <textarea name="newpost" placeholder="Entrer votre commentaire" rows="3" cols="35"></textarea>
                 <input type="submit" value="Envoyer">
-                <button name="like" class="likebutton"></button>
-                <button name="dislike" class="dislikebutton"></button>
+                <div class="like_dislike">
+                    <div class="like_info">
+                        <button name="like" class="likebutton"></button>
+                        <label for="like"> 1</label>
+                    </div>
+                    <div class="dislike_info">
+                        <button name="dislike" class="dislikebutton"></button>
+                        <label for="like"> 1</label>
+                    </div>
+                </div>
             </form>
         </div>
         <?php

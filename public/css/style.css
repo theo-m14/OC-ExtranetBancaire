@@ -182,10 +182,27 @@ h2 {
 .topbar_post {
   display: flex;
   justify-content: space-around;
+  flex-wrap: nowrap;
+}
+
+.topbar_post form {
+  display: flex;
 }
 
 .topbar_post form textarea {
   margin-top: 5%;
+}
+
+.topbar_post form input {
+  margin-top: 10%;
+  margin-left: 2%;
+}
+
+.like_dislike {
+  display: flex;
+  margin-top: 5.5%;
+  margin-left: 5%;
+  justify-content: space-between;
 }
 
 .likebutton {
@@ -200,6 +217,14 @@ h2 {
   width: 2rem;
   background-image: url("../img/dislike.png");
   border: #cf1818 solid 0.2rem;
+}
+
+.like_info {
+  text-align: center;
+}
+
+.dislike_info {
+  text-align: center;
 }
 
 .likebutton:hover {
