@@ -83,8 +83,8 @@ if (isset($_POST['like']) || isset($_POST['dislike'])) {
         $nbre_post = $postcurrentactor->fetch();
         $catchallactorpost = catchactorpost($bdd, $currentactor['id_acteur']); ?>
         <div class="topbar_post">
-            <h3>Commentaires</h3>
-            <form method="post">
+            <h3 id="section_commentaire">Commentaires</h3>
+            <form method="post" action="#section_commentaire">
                 <textarea name="newpost" placeholder="Entrer votre commentaire" rows="3" cols="35"></textarea>
                 <input type="submit" value="Envoyer">
                 <div class="like_dislike">
