@@ -49,3 +49,30 @@ function getnameuserpost($bdd, $id_user)
     $prenom = $currentuser['prenom'];
     return $prenom;
 }
+
+function likecounter($bdd, $currentactor)
+{
+    $counter = $bdd->prepare("SELECT COUNT(*) as Nblike FROM vote WHERE id_acteur=? AND vote=1");
+    $counter->execute(array($currentactor['id_acteur']));
+    $likecounter = $counter->fetch();
+    return $likecounter['Nblike'];
+}
+
+function dislikecounter($bdd, $currentactor)
+{
+    $counter = $bdd->prepare("SELECT COUNT(*) as Nbdislike FROM vote WHERE id_acteur=? AND vote=-1");
+    $counter->execute(array($currentactor['id_acteur']));
+    $dislikecounter = $counter->fetch();
+    return $dislikecounter['Nbdislike'];
+}
+
+function log_usercurrentactor($bdd, $username, $id_acteur) /* Récupération de l'utilisateur et de son vote sur l'acteur courant */
+{
+    $log_user = $bdd->query("SELECT a.prenom prenom, a.id_user id_user, v.vote vote
+                            FROM account a
+                            LEFT JOIN vote v
+                            ON a.id_user = v.id_user
+                            WHERE a.username='$username' AND v.id_acteur='$id_acteur'");
+    $info_user = $log_user->fetch();
+    return $info_user;
+}

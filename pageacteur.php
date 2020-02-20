@@ -7,7 +7,7 @@ if (!isset($_SESSION['username']) || !isset($_GET['id_acteur'])) {
 include("src/bdd/bddcall.php");
 $bdd = bddcall();
 $currentactor = currentactor($bdd, $_GET['id_acteur']);
-if (isset($_POST['newpost'])) {
+if (isset($_POST['newpost'])) { //Verif du commentaire null
     $currentuser = log_user($bdd, $_SESSION['username']);
     $post_register = $bdd->prepare('INSERT INTO post(id_acteur,id_user,post) 
                         VALUES(:id_acteur, :id_user, :post)');
@@ -16,6 +16,39 @@ if (isset($_POST['newpost'])) {
         'id_user' => $currentuser['id_user'],
         'post' => $_POST['newpost']
     ));
+}
+/* Vérification bouton like/dislike */
+if (isset($_POST['like']) || isset($_POST['dislike'])) {
+    $usercurrentactor = log_usercurrentactor($bdd, $_SESSION['username'], $currentactor['id_acteur']);
+    if (isset($_POST['like'])) {
+        if (isset($usercurrentactor['vote'])) { //Si l'utilisateur a déja voté on actualise
+            $usercurrentactor['vote'] = 1;
+            $updatebdd_like = $bdd->prepare("UPDATE vote SET vote=1 WHERE id_user=? AND id_acteur=?");
+            $updatebdd_like->execute(array($currentuser['id_user'], $currentactor['id_acteur']));
+        } else {
+            $writebdd_like = $bdd->prepare("INSERT INTO vote(id_user,id_acteur,vote)
+                                            VALUES(:id_user, :id_acteur, :vote)");
+            $writebdd_like->execute(array(
+                'id_user' => $currentuser['id_user'],
+                'id_acteur' => $currentactor['id_acteur'],
+                'vote' => 1
+            ));
+        }
+    } else {
+        if (isset($usercurrentactor['vote'])) {
+            $usercurrentactor['vote'] = -1;
+            $updatebdd_dislike = $bdd->prepare("UPDATE vote SET vote=-1 WHERE id_user=? AND id_acteur=?");
+            $updatebdd_dislike->execute(array($currentuser['id_user'], $currentactor['id_acteur']));
+        } else {
+            $writebdd_dislike = $bdd->prepare("INSERT INTO vote(id_user,id_acteur,vote)
+                                            VALUES(:id_user, :id_acteur, :vote)");
+            $writebdd_dislike->execute(array(
+                'id_user' => $currentuser['id_user'],
+                'id_acteur' => $currentactor['id_acteur'],
+                'vote' => -1
+            ));
+        }
+    }
 }
 ?>
 <!DOCTYPE html>
@@ -29,7 +62,8 @@ if (isset($_POST['newpost'])) {
 </head>
 
 <body>
-    <?php include("views/header.php"); ?>
+    <?php include("views/header.php");
+    ?>
     <div class="section_acteur">
         <img src="public/img/<?php echo $currentactor['logo']  ?>" alt="actorthumbnails" class="logoactor_actorpage">
         <h2 class="actortitle"><?php echo $currentactor['nom']; ?></h2>
@@ -50,12 +84,12 @@ if (isset($_POST['newpost'])) {
                 <input type="submit" value="Envoyer">
                 <div class="like_dislike">
                     <div class="like_info">
-                        <button name="like" class="likebutton"></button>
-                        <label for="like"> 1</label>
+                        <button name="like" class="likebutton" value="1"></button>
+                        <label for="like"><?php echo likecounter($bdd, $currentactor) ?></label>
                     </div>
                     <div class="dislike_info">
-                        <button name="dislike" class="dislikebutton"></button>
-                        <label for="like"> 1</label>
+                        <button name="dislike" class="dislikebutton" value="1"></button>
+                        <label for="dislike"><?php echo dislikecounter($bdd, $currentactor) ?></label>
                     </div>
                 </div>
             </form>
