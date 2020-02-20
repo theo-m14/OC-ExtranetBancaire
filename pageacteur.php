@@ -1,5 +1,9 @@
 <?php
 session_start();
+if (isset($_POST['logout']) && $_POST['logout'] == "true") {
+    session_destroy();
+    session_start();
+}
 if (!isset($_SESSION['username']) || !isset($_GET['id_acteur'])) {
     header('Location: http://localhost/oc-extranetbancaire/');
     exit();
