@@ -7,15 +7,17 @@ if (!isset($_SESSION['username']) || !isset($_GET['id_acteur'])) {
 include("src/bdd/bddcall.php");
 $bdd = bddcall();
 $currentactor = currentactor($bdd, $_GET['id_acteur']);
-if (isset($_POST['newpost'])) { //Verif du commentaire null
-    $currentuser = log_user($bdd, $_SESSION['username']);
-    $post_register = $bdd->prepare('INSERT INTO post(id_acteur,id_user,post) 
+$currentuser = log_user($bdd, $_SESSION['username']);
+if (isset($_POST['newpost'])) { //Ecriture du commentaire dans la bdd
+    if (preg_match("#.{2,}#", $_POST['newpost'])) {  //Verification présence de au moins 2caractères
+        $post_register = $bdd->prepare('INSERT INTO post(id_acteur,id_user,post) 
                         VALUES(:id_acteur, :id_user, :post)');
-    $post_register->execute(array(
-        'id_acteur' => $_GET['id_acteur'],
-        'id_user' => $currentuser['id_user'],
-        'post' => $_POST['newpost']
-    ));
+        $post_register->execute(array(
+            'id_acteur' => $_GET['id_acteur'],
+            'id_user' => $currentuser['id_user'],
+            'post' => $_POST['newpost']
+        ));
+    }
 }
 /* Vérification bouton like/dislike */
 if (isset($_POST['like']) || isset($_POST['dislike'])) {
@@ -62,8 +64,7 @@ if (isset($_POST['like']) || isset($_POST['dislike'])) {
 </head>
 
 <body>
-    <?php include("views/header.php");
-    ?>
+    <?php include("views/header.php"); ?>
     <div class="section_acteur">
         <img src="public/img/<?php echo $currentactor['logo']  ?>" alt="actorthumbnails" class="logoactor_actorpage">
         <h2 class="actortitle"><?php echo $currentactor['nom']; ?></h2>
