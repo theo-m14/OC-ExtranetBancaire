@@ -100,18 +100,56 @@ if (isset($_POST['like']) || isset($_POST['dislike'])) {
             </form>
         </div>
         <?php
-        for ($i = 0; $i < $nbre_post['Nbpost']; $i++) {
-            $currentpost = $catchallactorpost->fetch();
-            $prenom = getnameuserpost($bdd, $currentpost['id_user']); ?>
-            <div class="post">
-                <p class="post_info"><?php echo $prenom . "  :  " . $currentpost['date_add'] ?></p>
-                <p class="post_contenu"><?php echo $currentpost['post'] ?></p>
+        if ($nbre_post['Nbpost'] < 6) {
+            for ($i = 0; $i < $nbre_post['Nbpost']; $i++) {
+                $currentpost = $catchallactorpost->fetch();
+                $prenom = getnameuserpost($bdd, $currentpost['id_user']); ?>
+                <div class="post">
+                    <p class="post_info"><?php echo $prenom . "  :  " . $currentpost['date_add'] ?></p>
+                    <p class="post_contenu"><?php echo $currentpost['post'] ?></p>
+                </div>
+            <?php
+            }
+        } else {
+            if (!isset($_GET['page'])) {
+                $_GET['page'] = 1;
+                $page = 1;
+            } else {
+                $page = $_GET['page'];
+            }
+            if ($_GET['page'] > 1) {
+                for ($i = 0; $i < 6 * ($_GET['page'] - 1); $i++) { //on parcours jusqu'a le comm voulu
+                    $currentpost = $catchallactorpost->fetch();
+                }
+            }
+            if ($_GET['page'] == 1 || $_GET['page'] == 2) {
+                $currentpost = $catchallactorpost->fetch();
+            }
+            for ($i = 0; $i < 6 && isset($currentpost['id_user']); $i++) { //On affiche 6 commentaire && tant qu'un comm existe on affiche
+                $prenom = getnameuserpost($bdd, $currentpost['id_user']); ?>
+                <div class="post">
+                    <p class="post_info"><?php echo $prenom . "  :  " . $currentpost['date_add'] ?></p>
+                    <p class="post_contenu"><?php echo $currentpost['post'] ?></p>
+                </div>
+            <?php
+                $currentpost = $catchallactorpost->fetch();
+            }
+
+            ?>
+
+            <div class="post_pagination">
+                <!-- Gérance de l'affichage suivant ou précéd. selon le nombre de commentaire-->
+                <?php if ($_GET['page'] != 1) { ?>
+                    <a href="pageacteur.php?<?php echo "id_acteur=" . $currentactor['id_acteur'] . "&page=" . ($page - 1); ?>#section_commentaire">Page suivante</a>
+                <?php }
+                echo "<p>" . $_GET['page'] . "</p>";
+                if ($_GET['page'] <= ($nbre_post['Nbpost'] / 6)) { ?>
+                    <a href="pageacteur.php?<?php echo "id_acteur=" . $currentactor['id_acteur'] . "&page=" . ($page + 1); ?>#section_commentaire">Page précédente</a>
+                <?php } ?>
             </div>
-        <?php
-        }
-        ?>
     </div>
-    <?php include("views/footer.php") ?>
+<?php }
+        include("views/footer.php") ?>
 </body>
 
 </html>
