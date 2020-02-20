@@ -182,7 +182,6 @@ h2 {
 .topbar_post {
   display: flex;
   justify-content: space-around;
-  flex-wrap: nowrap;
 }
 
 .topbar_post form {
@@ -260,5 +259,24 @@ h2 {
 @media (min-width: 1024px) {
   .actordesc {
     display: flex;
+  }
+}
+
+/* Responsive top bar commentaire*/
+
+@media (max-width: 550px) {
+  .topbar_post {
+    flex-direction: column;
+  }
+
+  .like_dislike {
+    margin-left: 1%;
+    margin-right: 1%;
+  }
+
+  .topbar_post h3 {
+    text-align: center;
+    margin-top: 1%;
+    margin-bottom: 1%;
   }
 }
