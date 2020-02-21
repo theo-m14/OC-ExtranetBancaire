@@ -25,24 +25,32 @@ $pseudo_dispo = true;
     <?php
     if (isset($_POST['register_login'])) {
         if ($_POST['pass'] == $_POST['conf_pass'] && preg_match("#.{4,}#", $_POST['pass'])) {  //Verif si les deux pass sont identiques
-            if (preg_match("#^[a-z0-9]{2,}$#", $_POST['register_login'])) {
-                while ($username = $verif_username->fetch()) {
-                    if ($username['username'] == $_POST['register_login']) {
-                        echo "<p class='info_form'>Pseudo indisponible</p>"; //Verif du pseudo disponible
-                        $pseudo_dispo = false;
+            if (preg_match("#^[a-z0-9]{2,40}$#", $_POST['register_login'])) {
+                if (preg_match("#^[a-z]{3,40}$#", $_POST['firstname']) && preg_match("#^[a-z]{3,40}$#", $_POST['secondname'])) {
+                    if (preg_match("#^[a-z0-9]{3,40}$#", $_POST['secur_response'])) {
+                        while ($username = $verif_username->fetch()) {
+                            if ($username['username'] == $_POST['register_login']) {
+                                echo "<p class='info_form'>Pseudo indisponible</p>"; //Verif du pseudo disponible
+                                $pseudo_dispo = false;
+                            }
+                        }
+                        if ($pseudo_dispo) {
+                            $enregistrement_utilisateur->execute(array(
+                                'nom' => $_POST['firstname'],
+                                'prenom' => $_POST['secondname'],
+                                'username' => $_POST['register_login'],
+                                'password' => password_hash($_POST['pass'], PASSWORD_DEFAULT), //hacher le mdp
+                                'question' => $_POST['secur_question'],
+                                'reponse' => password_hash($_POST['secur_response'], PASSWORD_DEFAULT),
+                            ));
+                            header('Location: http://localhost/oc-extranetbancaire/');
+                            exit();
+                        }
+                    } else {
+                        echo "<p class='info_form'>Réponse de sécurité non conforme. Elle doit être composé d'au moins 3 caractères alphanumériques seulement</p>";
                     }
-                }
-                if ($pseudo_dispo) {
-                    $enregistrement_utilisateur->execute(array(
-                        'nom' => $_POST['firstname'],
-                        'prenom' => $_POST['secondname'],
-                        'username' => $_POST['register_login'],
-                        'password' => password_hash($_POST['pass'], PASSWORD_DEFAULT), //hacher le mdp
-                        'question' => $_POST['secur_question'],
-                        'reponse' => password_hash($_POST['secur_response'], PASSWORD_DEFAULT),
-                    ));
-                    header('Location: http://localhost/oc-extranetbancaire/');
-                    exit();
+                } else {
+                    echo "<p class='info_form'>Nom ou prénom non conforme</p>";
                 }
             } else {
                 echo "<p class='info_form'>Pseudo non conformes. Il doit contenir seulement des caractères alphanumériques(Au moins 2)</p>";
