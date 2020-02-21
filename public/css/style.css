@@ -283,6 +283,10 @@ h2 {
   flex-direction: column;
   margin-right: auto;
 }
+
+.info_form {
+  text-align: center;
+}
 /* Breakpoint */
 @media (min-width: 768px) {
   .actordisplay {

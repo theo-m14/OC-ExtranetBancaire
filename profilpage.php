@@ -9,6 +9,7 @@ include("src/bdd/bddcall.php");
 $bdd = bddcall();
 $currentuser = log_user($bdd, $_SESSION['username']);
 $modif = false;
+$pseudodispo = true;
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -23,7 +24,19 @@ $modif = false;
 <body>
     <?php
     if (isset($_POST['username']) && $_POST['username'] != $_SESSION['username']) { //Verif des données modifiées une à une
-
+        $verifusername = $bdd->query("SELECT username FROM account");
+        while ($username = $verifusername->fetch()) {
+            if ($_POST['username'] == $username['username']) {
+                $pseudodispo = false;
+            }
+        }
+        if ($pseudodispo) {
+            $champmodifié = "username";
+            modifusername($bdd, $_POST['username'], $currentuser['id_user']);
+            $_SESSION['username'] = $_POST['username'];
+            $currentuser = log_user($bdd, $_SESSION['username']);
+            $modif = true;
+        }
     }
     if (isset($_POST['firstname']) &&  $_POST['firstname'] != $currentuser['nom']) {
         $champmodifié = "nom";
@@ -44,10 +57,12 @@ $modif = false;
             $currentuser = log_user($bdd, $_SESSION['username']);
             $modif = true;
         } else {
+            include("views/header.php");
             echo "<p style='text-align:center;'>Les mots de passe ne sont pas identiques</p>";
         }
+    } else {
+        include("views/header.php");
     }
-    include("views/header.php");
 
     if ((!isset($_POST['currentpass']) || !password_verify($_POST['currentpass'], $currentuser['password'])) && !$modif) { //Demande de mdp avant accccès aux informations
         if (isset($_POST['currentpass']) && !password_verify($_POST['currentpass'], $currentuser['password'])) {
@@ -62,7 +77,12 @@ $modif = false;
         </div>
     <?php } else {
     ?>
-        <h2>Paramètres du compte</h2><?php if ($modif = true) echo "<br><p style='text-align:center;'>Informations modifiés</p>" ?>
+        <h2>Paramètres du compte</h2><?php if ($modif) {
+                                            echo "<br><p class=info_form>Informations modifiés</p>";
+                                        }
+                                        if (!$pseudodispo) {
+                                            echo "<br><p class=info_form>Pseudo indisponible</p>";
+                                        } ?>
         <form action="profilpage.php" method="POST" class="profil_form">
             <div class="profil_nom_champ">
                 <label for="identifiant">Pseudonyme</label><br>
@@ -72,11 +92,11 @@ $modif = false;
                 <label for="prenom">Prénom</label><br>
             </div>
             <div class="profil_champ">
-                <input type="text" name="username" id="identifiant" value="<?php echo $currentuser['username']; ?>"><br>
+                <input type="text" name="username" id="identifiant" value="<?php echo htmlspecialchars($currentuser['username']); ?>"><br>
                 <input type="password" name="pass" id="new_password"><br>
                 <input type="password" name="conf_pass" id="confirm_password"><br>
-                <input type="text" name="firstname" id="nom" value="<?php echo $currentuser['nom']; ?>"><br>
-                <input type="text" name="secondname" id="prenom" value="<?php echo $currentuser['prenom']; ?>"><br>
+                <input type="text" name="firstname" id="nom" value="<?php echo htmlspecialchars($currentuser['nom']); ?>"><br>
+                <input type="text" name="secondname" id="prenom" value="<?php echo htmlspecialchars($currentuser['prenom']); ?>"><br>
                 <input type="hidden" name="currentpass" value="<?php echo $_POST['currentpass']; ?>">
                 <input type="submit" value="Modifier vos informations">
             </div>

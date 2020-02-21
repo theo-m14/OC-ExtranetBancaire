@@ -76,7 +76,7 @@ function log_usercurrentactor($bdd, $username, $id_acteur) /* Récupération de 
     $info_user = $log_user->fetch();
     return $info_user;
 }
-
+/* Fonction pour les modifications de profil*/
 function modifnom($bdd, $nouvellevaleur, $iduser)
 {
     $modifinfo = $bdd->prepare('UPDATE account SET nom=? WHERE id_user=?');
