@@ -25,9 +25,9 @@ $pseudo_dispo = true;
     <?php
     if (isset($_POST['register_login'])) {
         if ($_POST['pass'] == $_POST['conf_pass'] && preg_match("#.{4,}#", $_POST['pass'])) {  //Verif si les deux pass sont identiques
-            if (preg_match("#^[a-z0-9]{2,40}$#", $_POST['register_login'])) {
-                if (preg_match("#^[a-z]{3,40}$#", $_POST['firstname']) && preg_match("#^[a-z]{3,40}$#", $_POST['secondname'])) {
-                    if (preg_match("#^[a-z0-9]{3,40}$#", $_POST['secur_response'])) {
+            if (preg_match("#^[a-z0-9áàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ]{2,40}$#i", $_POST['register_login'])) {
+                if (preg_match("#^[a-záàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ]{3,40}$#i", $_POST['firstname']) && preg_match("#^[a-záàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ]{3,40}$#i", $_POST['secondname'])) {
+                    if (preg_match("#^[a-z0-9áàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ]{3,40}$#i", $_POST['secur_response'])) {
                         while ($username = $verif_username->fetch()) {
                             if ($username['username'] == $_POST['register_login']) {
                                 echo "<p class='info_form'>Pseudo indisponible</p>"; //Verif du pseudo disponible
