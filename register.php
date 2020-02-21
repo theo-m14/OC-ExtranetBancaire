@@ -20,32 +20,41 @@ $pseudo_dispo = true;
 </head>
 
 <body>
-    <?php include('views/header.php');
+    <?php include('views/header.php'); ?>
+    <h2>Inscription à l'extranet GBAF</h2>
+    <?php
     if (isset($_POST['register_login'])) {
-        if ($_POST['pass'] == $_POST['conf_pass']) {  //Verif si les deux pass sont identiques
-            while ($username = $verif_username->fetch()) {
-                if ($username['username'] == $_POST['register_login']) {
-                    $pseudo_dispo = false;  //Verif du pseudo disponible
+        if ($_POST['pass'] == $_POST['conf_pass'] && preg_match("#.{4,}#", $_POST['pass'])) {  //Verif si les deux pass sont identiques
+            if (preg_match("#^[a-z0-9]{2,}$#", $_POST['register_login'])) {
+                while ($username = $verif_username->fetch()) {
+                    if ($username['username'] == $_POST['register_login']) {
+                        echo "<p class='info_form'>Pseudo indisponible</p>"; //Verif du pseudo disponible
+                        $pseudo_dispo = false;
+                    }
                 }
+                if ($pseudo_dispo) {
+                    $enregistrement_utilisateur->execute(array(
+                        'nom' => $_POST['firstname'],
+                        'prenom' => $_POST['secondname'],
+                        'username' => $_POST['register_login'],
+                        'password' => password_hash($_POST['pass'], PASSWORD_DEFAULT), //hacher le mdp
+                        'question' => $_POST['secur_question'],
+                        'reponse' => password_hash($_POST['secur_response'], PASSWORD_DEFAULT),
+                    ));
+                    header('Location: http://localhost/oc-extranetbancaire/');
+                    exit();
+                }
+            } else {
+                echo "<p class='info_form'>Pseudo non conformes. Il doit contenir seulement des caractères alphanumériques(Au moins 2)</p>";
             }
-            if ($pseudo_dispo) {
-                $enregistrement_utilisateur->execute(array(
-                    'nom' => $_POST['firstname'],
-                    'prenom' => $_POST['secondname'],
-                    'username' => $_POST['register_login'],
-                    'password' => password_hash($_POST['pass'], PASSWORD_DEFAULT), //hacher le mdp
-                    'question' => $_POST['secur_question'],
-                    'reponse' => password_hash($_POST['secur_response'], PASSWORD_DEFAULT),
-                ));
-                header('Location: http://localhost/oc-extranetbancaire/');
-                exit();
-            }
+        } else {
+            if (preg_match("#.{4,}#", $_POST['pass'])) {
+                echo "<p class='info_form'>Les mots de passes saisis sont différents";
+            } else echo "<p class='info_form'>Votre mot de passe doit contenir au moins 4 caractères";
         }
     }
     ?>
 
-    <h2>Inscription à l'extranet GBAF</h2>
-    <?php if (!$pseudo_dispo) echo "<p style='text-align:center;'>Pseudo indisponible</p>"  ?>
     <form action="register.php" method="POST" class="register_form">
         <div class="nom_champ">
             <label for="register_identifiant">Pseudonyme</label><br>
