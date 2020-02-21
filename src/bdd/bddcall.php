@@ -76,3 +76,26 @@ function log_usercurrentactor($bdd, $username, $id_acteur) /* Récupération de 
     $info_user = $log_user->fetch();
     return $info_user;
 }
+
+function modifnom($bdd, $nouvellevaleur, $iduser)
+{
+    $modifinfo = $bdd->prepare('UPDATE account SET nom=? WHERE id_user=?');
+    $modifinfo->execute(array($nouvellevaleur, $iduser));
+}
+
+function modifprenom($bdd, $nouvellevaleur, $iduser)
+{
+    $modifinfo = $bdd->prepare('UPDATE account SET prenom=? WHERE id_user=?');
+    $modifinfo->execute(array($nouvellevaleur, $iduser));
+}
+
+function modifusername($bdd, $nouvellevaleur, $iduser)
+{
+    $modifinfo = $bdd->prepare('UPDATE account SET username=? WHERE id_user=?');
+    $modifinfo->execute(array($nouvellevaleur, $iduser));
+}
+function modifpassword($bdd, $nouvellevaleur, $iduser)
+{
+    $modifinfo = $bdd->prepare('UPDATE account SET password=? WHERE id_user=?');
+    $modifinfo->execute(array($nouvellevaleur, $iduser));
+}

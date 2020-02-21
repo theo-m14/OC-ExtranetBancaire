@@ -11,6 +11,8 @@
 				<input type="hidden" name="logout" value="true">
 				<input type="submit" value="Déconnexion">
 			</form>
+			<a href="profilpage.php">Paramètres de compte</a>
 		<?php } ?>
+
 	</div>
 </div>
