@@ -57,8 +57,8 @@ $pseudo_dispo = true;
             }
         } else {
             if (preg_match("#.{4,}#", $_POST['pass'])) {
-                echo "<p class='info_form'>Les mots de passes saisis sont différents";
-            } else echo "<p class='info_form'>Votre mot de passe doit contenir au moins 4 caractères";
+                echo "<p class='info_form'>Les mots de passes saisis sont différents</p>";
+            } else echo "<p class='info_form'>Votre mot de passe doit contenir au moins 4 caractères</p>";
         }
     }
     ?>

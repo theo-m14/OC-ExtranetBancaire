@@ -16,12 +16,16 @@
     if (isset($_POST['pseudonyme'])) {
         $user = log_user($bdd, $_POST['pseudonyme']);
         if ($_POST['secur_question'] == $user['question'] && password_verify($_POST['secur_response'], $user['reponse'])) {
-            $passchange = $bdd->prepare("UPDATE account SET password = ? WHERE id_user = ?");
-            $passchange->execute(array(password_hash($_POST['new_pass'], PASSWORD_DEFAULT), $user['id_user']));
-            header('Location: http://localhost/oc-extranetbancaire/?recover=1');
-            exit();
+            if (preg_match("#.{4,}#", $_POST['new_pass'])) {
+                $passchange = $bdd->prepare("UPDATE account SET password = ? WHERE id_user = ?");
+                $passchange->execute(array(password_hash($_POST['new_pass'], PASSWORD_DEFAULT), $user['id_user']));
+                header('Location: http://localhost/oc-extranetbancaire/?recover=1');
+                exit();
+            } else {
+                echo "<p class='info_form'>Votre mot de passe doit contenir au moins 4 caractères</p>";
+            }
         } else {
-            echo "<h3 class='passmodified'>Informations incorrects</h3>";
+            echo "<p class='info_form'>Informations incorrects</p>";
         }
     }
     ?>
