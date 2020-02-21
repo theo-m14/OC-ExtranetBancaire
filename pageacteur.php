@@ -100,13 +100,13 @@ if (isset($_POST['like']) || isset($_POST['dislike'])) {
             </form>
         </div>
         <?php
-        if ($nbre_post['Nbpost'] < 6) {
+        if ($nbre_post['Nbpost'] < 6) { //Si moins de 6commentaire on les affiche tous
             for ($i = 0; $i < $nbre_post['Nbpost']; $i++) {
                 $currentpost = $catchallactorpost->fetch();
                 $prenom = getnameuserpost($bdd, $currentpost['id_user']); ?>
                 <div class="post">
-                    <p class="post_info"><?php echo $prenom . "  :  " . $currentpost['date_add'] ?></p>
-                    <p class="post_contenu"><?php echo $currentpost['post'] ?></p>
+                    <p class="post_info"><?php echo htmlspecialchars($prenom) . "  :  " . $currentpost['date_add'] ?></p>
+                    <p class="post_contenu"><?php echo htmlspecialchars($currentpost['post']) ?></p>
                 </div>
             <?php
             }
@@ -122,14 +122,14 @@ if (isset($_POST['like']) || isset($_POST['dislike'])) {
                     $currentpost = $catchallactorpost->fetch();
                 }
             }
-            if ($_GET['page'] == 1 || $_GET['page'] == 2) {
+            if ($_GET['page'] == 1 || $_GET['page'] == 2) {  //Eviter le duplicata de commentaire en page 2
                 $currentpost = $catchallactorpost->fetch();
             }
             for ($i = 0; $i < 6 && isset($currentpost['id_user']); $i++) { //On affiche 6 commentaire && tant qu'un comm existe on affiche
                 $prenom = getnameuserpost($bdd, $currentpost['id_user']); ?>
                 <div class="post">
-                    <p class="post_info"><?php echo $prenom . "  :  " . $currentpost['date_add'] ?></p>
-                    <p class="post_contenu"><?php echo $currentpost['post'] ?></p>
+                    <p class="post_info"><?php echo htmlspecialchars($prenom) . "  :  " . $currentpost['date_add'] ?></p>
+                    <p class="post_contenu"><?php echo htmlspecialchars($currentpost['post']) ?></p>
                 </div>
             <?php
                 $currentpost = $catchallactorpost->fetch();

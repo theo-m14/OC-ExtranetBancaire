@@ -6,7 +6,7 @@
 		<?php if (isset($_SESSION['username'])) {
 			$userinfo = log_user($bdd, $_SESSION['username']);
 		?>
-			<p><?php echo $userinfo['nom'] . " : " . $userinfo['prenom'] ?></p>
+			<p><?php echo htmlspecialchars($userinfo['nom']) . " : " . htmlspecialchars($userinfo['prenom']) ?></p>
 			<form method="post">
 				<input type="hidden" name="logout" value="true">
 				<input type="submit" value="Déconnexion">
