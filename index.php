@@ -63,21 +63,23 @@ $bdd = bddcall();
 	?>
 		<div class="presentation">
 			<h1>Le GBAF et son Extranet</h1>
-			<p>
-				Le Groupement Banque Assurance Français (GBAF) est une fédération
-				représentant les 6 grands groupes français :
-			</p>
-			<ul>
-				<li>BNP Paribas</li>
-				<li>BPCE</li>
-				<li>Crédit Agricole</li>
-				<li>Crédit Mutuel-CIC</li>
-				<li>Société Générale</li>
-				<li>La Banque Postale</li>
-			</ul>
-			<p>Ce site est destiné à regrouper des informations sur les différents acteurs et partenaires du secteur bancaire,
-				tels que les associations ou les financeurs solidaires.
-			</p>
+			<div class="text_presentation">
+				<p>
+					Le Groupement Banque Assurance Français (GBAF) est une fédération
+					représentant les 6 grands groupes français :
+				</p>
+				<ul>
+					<li>BNP Paribas</li>
+					<li>BPCE</li>
+					<li>Crédit Agricole</li>
+					<li>Crédit Mutuel-CIC</li>
+					<li>Société Générale</li>
+					<li>La Banque Postale</li>
+				</ul>
+				<p>Ce site est destiné à regrouper des informations sur les différents acteurs et partenaires du secteur bancaire,
+					tels que les associations ou les financeurs solidaires.
+				</p>
+			</div>
 		</div>
 		<div class="acteurs_partenaire">
 			<h2>Acteurs et Partenaire du Groupe GBAF</h2><br>

@@ -9,7 +9,7 @@
 			<p><?php echo htmlspecialchars($userinfo['nom']) . " : " . htmlspecialchars($userinfo['prenom']) ?></p>
 			<form method="post">
 				<input type="hidden" name="logout" value="true">
-				<input type="submit" value="Déconnexion">
+				<input class="button_logout" type="submit" value="DECONNEXION">
 			</form>
 			<a href="profilpage.php">Paramètres de compte</a>
 		<?php } ?>

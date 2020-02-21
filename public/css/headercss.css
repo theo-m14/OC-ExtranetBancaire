@@ -1,7 +1,8 @@
 .header {
-  background-color: cadetblue;
+  background-color: #cccccc;
   width: 100%;
   margin: 0;
+  padding-bottom: 2%;
 }
 
 .divlogo_gbaf {
@@ -20,6 +21,25 @@
 
 .user_spec form {
   margin-bottom: 2rem;
+}
+.user_spec a {
+  background-color: #ff0000;
+  color: black;
+  text-decoration: none;
+  border-radius: 10px;
+  font-weight: bold;
+  width: 120px;
+  height: 16px;
+  padding: 1% 2% 1% 2%;
+  text-transform: uppercase;
+}
+.button_logout {
+  background-color: #ff0000;
+  border: none;
+  border-radius: 10px;
+  font-weight: bold;
+  width: 150px;
+  height: 25px;
 }
 
 @media (min-width: 768px) {

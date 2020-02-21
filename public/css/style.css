@@ -2,7 +2,6 @@ html {
   height: 100%;
 }
 * {
-  -moz-box-sizing: border-box;
   box-sizing: border-box;
 }
 body {
@@ -33,7 +32,74 @@ h2 {
 .footer a {
   color: black;
 }
+/* CSS page d'acceuil*/
 
+.presentation {
+  background-color: #ffffff;
+  padding-left: 5%;
+  padding-top: 2%;
+  padding-bottom: 3%;
+}
+
+.presentation h1 {
+  margin-top: 0;
+}
+
+/* Section acteur d'index.php*/
+
+.logoactor {
+  width: 480px;
+  height: 148px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.actorpage {
+  display: block;
+  white-space: nowrap;
+  text-align: right;
+  margin-right: 5%;
+  margin-bottom: 1%;
+}
+.acteurs_partenaire {
+  padding-right: 2%;
+  padding-left: 2%;
+  background-color: #f5f5f6;
+  padding-top: 2%;
+}
+.acteurs_partenaire h2 {
+  margin-top: 0;
+}
+
+.actordisplay {
+  margin-bottom: 3%;
+  border-width: 0.3rem;
+  border-style: solid;
+  border-color: #ff0000;
+  border-radius: 20px;
+  background-color: white;
+}
+
+.actordisplay h3 {
+  margin: auto;
+}
+.actordesc {
+  margin-left: 2%;
+}
+
+.actordesc a {
+  text-decoration: none;
+  background-color: #ff0000;
+  color: black;
+  text-decoration: none;
+  border-radius: 10px;
+  font-weight: bold;
+  padding: 1% 2% 1% 0%;
+  text-transform: uppercase;
+}
+
+.acteurs_partenaire
 /* CSS du formulaire de connexion */
 
 .form_login {
@@ -69,40 +135,6 @@ h2 {
 .champ {
   display: flex;
   flex-direction: column;
-}
-
-/* Section acteur d'index.php*/
-
-.logoactor {
-  width: 480px;
-  height: 148px;
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.actorpage {
-  display: block;
-  text-align: right;
-  margin-right: 2%;
-  margin-bottom: 2%;
-}
-.acteurs_partenaire {
-  margin-right: 2%;
-  margin-left: 2%;
-}
-
-.actordisplay {
-  margin-bottom: 3%;
-  border-width: 0.2rem;
-  border-style: solid;
-}
-
-.actordisplay h3 {
-  margin: auto;
-}
-.actordesc {
-  margin-left: 2%;
 }
 
 /* CSS Page mot de passe oublié*/
@@ -298,10 +330,7 @@ h2 {
   }
 
   .actorpage {
-    width: 170px;
-    margin-bottom: 0;
-    margin: auto;
-    margin-right: 2%;
+    margin-right: 5%;
   }
 
   .actordesc {
@@ -312,6 +341,10 @@ h2 {
 @media (min-width: 1024px) {
   .actordesc {
     display: flex;
+  }
+  .actorpage {
+    margin-top: auto;
+    margin-bottom: auto;
   }
 }
 
