@@ -204,7 +204,7 @@ h2 {
 }
 
 .post {
-  border: solid 0.1rem black;
+  border: solid 0.1rem #cccccc;
   border-radius: 5px;
   margin: 1% 1% 1% 1%;
   background-color: white;
@@ -222,6 +222,10 @@ h2 {
 .topbar_post {
   display: flex;
   justify-content: space-around;
+}
+
+.topbar_post h3 {
+  margin-top: auto;
 }
 
 .topbar_post form {
