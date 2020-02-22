@@ -98,7 +98,7 @@ $bdd = bddcall();
 				<div class=actordisplay>
 					<img src="public/img/<?php echo $currentactor['logo']  ?>" alt="actorthumbnails" class="logoactor">
 					<div class="actordesc">
-						<h3> <?php echo $currentshortdesc['shortdesc'] . "..."; ?></h3>
+						<p> <?php echo $currentshortdesc['shortdesc'] . "..."; ?></p>
 						<a href="pageacteur.php?id_acteur=<?php echo $currentactor['id_acteur']; ?>" class="actorpage">Lire la suite</a>
 					</div>
 				</div><?php
