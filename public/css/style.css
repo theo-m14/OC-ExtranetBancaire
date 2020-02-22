@@ -278,8 +278,6 @@ h2 {
   display: flex;
   justify-content: space-around;
   align-items: center;
-  margin-right: 42%;
-  margin-left: 42%;
 }
 /* CSS profilpage*/
 
@@ -401,7 +399,7 @@ h2 {
   }
 
   .topbar_post form textarea {
-    width: 323px;
+    width: 100%;
     height: 144px;
   }
 }
