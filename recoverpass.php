@@ -49,6 +49,7 @@
         </div>
     </form>
     <p style="text-align: center"><a href="index.php">Retour à la connexion</a> </p>
+    <?php include("views/footer.php") ?>
 </body>
 
 </html>

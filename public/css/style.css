@@ -173,8 +173,16 @@ h2 {
 .form_recoverpass {
   display: flex;
   height: 20rem;
-  margin-right: 20%;
-  margin-left: 20%;
+  margin-right: auto;
+  margin-left: auto;
+  background-color: #f5f5f6;
+  padding-top: 2%;
+  padding-bottom: 2%;
+  border-radius: 15px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  margin-top: 5%;
+  min-width: 480px;
+  max-width: 600px;
 }
 
 .form_recoverpass div {
@@ -399,6 +407,30 @@ h2 {
   }
 }
 
+@media (max-width: 486px) {
+  .champ_recoverpass {
+    max-width: 30%;
+    position: relative;
+    margin-left: 0;
+  }
+
+  .nomchamp_recoverpass {
+    max-width: 30%;
+    position: relative;
+    margin-left: 1%;
+    margin-right: 1%;
+    font-size: 15px;
+  }
+
+  .form_recoverpass {
+    max-width: 200px;
+  }
+}
+@media (min-width: 1150px) {
+  .nomchamp_recoverpass {
+    padding-top: 5%;
+  }
+}
 @media (max-width: 545px) {
   .logoactor {
     width: 90%;
