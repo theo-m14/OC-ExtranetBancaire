@@ -23,11 +23,12 @@ $pseudo_dispo = true;
     <?php include('views/header.php'); ?>
     <h2>Inscription à l'extranet GBAF</h2>
     <?php
+    $carac_alphanumérique = "#^[a-z0-9áàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ]{2,40}$#i";
     if (isset($_POST['register_login'])) {
         if ($_POST['pass'] == $_POST['conf_pass'] && preg_match("#.{4,}#", $_POST['pass'])) {  //Verif si les deux pass sont identiques
-            if (preg_match("#^[a-z0-9áàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ]{2,40}$#i", $_POST['register_login'])) {
-                if (preg_match("#^[a-záàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ]{3,40}$#i", $_POST['firstname']) && preg_match("#^[a-záàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ]{3,40}$#i", $_POST['secondname'])) {
-                    if (preg_match("#^[a-z0-9áàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ]{3,40}$#i", $_POST['secur_response'])) {
+            if (preg_match($carac_alphanumérique, $_POST['register_login'])) {
+                if (preg_match($carac_alphanumérique, $_POST['firstname']) && preg_match($carac_alphanumérique, $_POST['secondname'])) {
+                    if (preg_match($carac_alphanumérique, $_POST['secur_response'])) {
                         while ($username = $verif_username->fetch()) {
                             if ($username['username'] == $_POST['register_login']) {
                                 echo "<p class='info_form'>Pseudo indisponible</p>"; //Verif du pseudo disponible

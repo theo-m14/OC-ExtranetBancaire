@@ -103,7 +103,7 @@ h2 {
 .box_login {
   background-color: #f5f5f6;
   padding-top: 2%;
-  padding-bottom: 2%;
+  padding-bottom: 3%;
   border-radius: 15px;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
   margin-top: 2%;
@@ -148,7 +148,6 @@ h2 {
 .inscription {
   margin-top: 5rem;
   text-align: center;
-  margin-bottom: 8rem;
 }
 /* CSS de register.php */
 .register_form {
@@ -172,7 +171,7 @@ h2 {
 /* CSS Page mot de passe oublié*/
 .form_recoverpass {
   display: flex;
-  height: 20rem;
+  height: 21rem;
   margin-right: auto;
   margin-left: auto;
   background-color: #f5f5f6;

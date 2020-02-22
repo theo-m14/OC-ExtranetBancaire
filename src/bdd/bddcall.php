@@ -38,16 +38,13 @@ function currentactor($bdd, $acteur_id)
 
 function catchactorpost($bdd, $acteur_id)
 {
-    $allactorpost = $bdd->query("SELECT * FROM post WHERE id_acteur='$acteur_id' ORDER BY id_post DESC");
+    $allactorpost = $bdd->query("SELECT p.date_add date_add, p.post post, a.prenom prenom
+                                FROM post p
+                                LEFT JOIN account a
+                                ON p.id_user=a.id_user
+                                WHERE id_acteur='$acteur_id' 
+                                ORDER BY id_post DESC");
     return $allactorpost;
-}
-
-function getnameuserpost($bdd, $id_user)
-{
-    $user = $bdd->query("SELECT prenom FROM account WHERE id_user='$id_user'");
-    $currentuser = $user->fetch();
-    $prenom = $currentuser['prenom'];
-    return $prenom;
 }
 
 function likecounter($bdd, $currentactor)
