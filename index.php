@@ -45,19 +45,24 @@ $bdd = bddcall();
 			echo "<h3 class='passmodified'>Mot de passe modifié!</h3>";
 		}
 	?>
-		<div class="form_login">
-			<form action="index.php" method="post">
-				<label for="identifiant">Login</label>
-				<input type="text" name="login" id="identifiant"></br><br>
-				<label for="password">Password</label>
-				<input type="password" name="pass" id="password"></br>
-				<input type="submit" value="Valider">
+		<div class=box_login>
+			<div class="form_login">
+				<form action="index.php" method="post">
+					<div class="name_log_champ">
+						<label for="identifiant">Login</label><br><br>
+						<label for="password">Password</label>
+					</div>
+					<div class="log_champ">
+						<input type="text" name="login" id="identifiant"></br><br>
+						<input type="password" name="pass" id="password"></br><br>
+						<input type="submit" value="Connexion" class="login_button">
+					</div>
+			</div>
+			<div class="recoverpass"><a href="recoverpass.php">Mot de passe oublié ?</a></div>
+			<div class="inscription">
+				<p>Pas encore de compte ?<a href="register.php">Inscription</a></p>
+			</div>
 		</div>
-		<div class="recoverpass"><a href="recoverpass.php">Mot de passe oublié ?</a></div>
-		<div class="inscription">
-			<p>Pas encore de compte ?<a href="register.php">Inscription</a></p>
-		</div>
-
 	<?php
 	} else {  //Si la session existe on affiche le site
 	?>

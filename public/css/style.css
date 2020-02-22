@@ -33,6 +33,7 @@ h2 {
 .footer a {
   color: black;
 }
+
 /* CSS page d'acceuil*/
 
 .presentation {
@@ -99,6 +100,36 @@ h2 {
 }
 
 /* CSS du formulaire de connexion */
+.box_login {
+  background-color: #f5f5f6;
+  padding-top: 2%;
+  padding-bottom: 2%;
+  border-radius: 15px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  margin-top: 5%;
+  margin-left: 32%;
+  margin-right: 32%;
+  max-height: 350px;
+  min-width: 400px;
+}
+
+.form_login form {
+  display: flex;
+  margin-left: 25%;
+}
+
+.name_log_champ {
+  padding-right: 5%;
+  padding-top: 1%;
+}
+
+.log_champ {
+  display: block;
+}
+.login_button {
+  margin-left: 0;
+}
+
 .form_login {
   margin-top: 3rem;
   text-align: center;
@@ -347,6 +378,12 @@ h2 {
 
   .actordesc {
     margin: auto;
+  }
+}
+
+@media (max-width: 700px) {
+  .box_login {
+    margin-left: 10%;
   }
 }
 
