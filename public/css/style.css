@@ -241,7 +241,6 @@ h2 {
   display: flex;
   margin-top: 5.5%;
   margin-left: 5%;
-  justify-content: space-between;
 }
 
 .likebutton {
@@ -260,6 +259,7 @@ h2 {
 
 .like_info {
   text-align: center;
+  margin-right: 10%;
 }
 
 .dislike_info {
@@ -358,10 +358,22 @@ h2 {
     padding-right: 14.5%;
   }
 }
+/*Responsive section acteur-pageacteur */
+@media (max-width: 425px) {
+  .logoactor_actorpage {
+    width: 80%;
+    height: 80%;
+  }
+}
 
 /* Responsive top bar commentaire*/
 
-@media (max-width: 550px) {
+@media (max-width: 610px) {
+  .topbar_post form {
+    margin-right: auto;
+    margin-left: auto;
+  }
+
   .topbar_post {
     flex-direction: column;
   }
@@ -375,5 +387,21 @@ h2 {
     text-align: center;
     margin-top: 1%;
     margin-bottom: 1%;
+  }
+}
+
+@media (max-width: 440px) {
+  .topbar_post form {
+    flex-direction: column;
+  }
+
+  .like_dislike {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .topbar_post form textarea {
+    width: 323px;
+    height: 144px;
   }
 }
