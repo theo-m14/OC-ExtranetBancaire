@@ -7,7 +7,12 @@ if (isset($_POST['logout']) && $_POST['logout'] == "true") {
 
 include("src/bdd/bddcall.php");
 $bdd = bddcall();
-$currentuser = log_user($bdd, $_SESSION['username']);
+if (isset($_SESSION['username'])) { //Vérification de l'utilisateur connecté
+    $currentuser = log_user($bdd, $_SESSION['username']);
+} else {
+    header('Location: http://localhost/oc-extranetbancaire/'); //renvoi sur index.php -> login
+    exit();
+}
 $modif = false;
 $pseudodispo = true;
 ?>
