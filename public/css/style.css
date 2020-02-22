@@ -87,8 +87,8 @@ h2 {
 
 .actorpage {
   text-decoration: none;
-  background-color: #ff0000;
-  color: black;
+  background-color: #c20000;
+  color: white;
   border-radius: 10px;
   font-weight: bold;
   padding: 0.5% 1% 0.5% 1%;
@@ -97,9 +97,7 @@ h2 {
   margin-right: 2%;
 }
 
-.acteurs_partenaire
 /* CSS du formulaire de connexion */
-
 .form_login {
   margin-top: 3rem;
   text-align: center;
