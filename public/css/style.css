@@ -137,7 +137,6 @@ h2 {
 .form_login {
   margin-top: 3rem;
   text-align: center;
-  height: 8rem;
 }
 
 .recoverpass {
@@ -155,6 +154,12 @@ h2 {
   width: 600px;
   margin-left: auto;
   margin-right: auto;
+  background-color: #f5f5f6;
+  padding-top: 2%;
+  padding-bottom: 3%;
+  padding-left: 2%;
+  border-radius: 15px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
 }
 
 .nom_champ {
@@ -166,6 +171,10 @@ h2 {
 .champ {
   display: flex;
   flex-direction: column;
+}
+
+.return_login {
+  text-align: center;
 }
 
 /* CSS Page mot de passe oublié*/
@@ -403,6 +412,22 @@ h2 {
 @media (max-width: 264px) {
   .form_login form {
     max-width: 300px;
+  }
+}
+
+@media (max-width: 510px) {
+  .register_form .champ {
+    width: 25%;
+  }
+}
+
+@media (max-width: 362px) {
+  .register_form .champ {
+    width: 20%;
+  }
+
+  .register_form .nom_champ {
+    width: 20%;
   }
 }
 

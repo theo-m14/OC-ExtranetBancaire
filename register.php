@@ -15,7 +15,6 @@ $pseudo_dispo = true;
     <meta charset="UTF-8">
     <title>Inscription</title>
     <link rel="stylesheet" type="text/css" href="public/css/headercss.css">
-    <link rel="stylesheet" type="text/css" href="public/css/styleregister.css">
     <link rel="stylesheet" type="text/css" href="public/css/style.css">
 </head>
 
@@ -90,7 +89,7 @@ $pseudo_dispo = true;
             <input type="submit" value="Inscription">
         </div>
     </form>
-    <p>Déja un compte ? <a href="index.php">Connexion</a> </p> <?php include("views/footer.php"); ?>
+    <p class="return_login">Déja un compte ? <a href="index.php">Connexion</a> </p> <?php include("views/footer.php"); ?>
 </body>
 
 </html>
