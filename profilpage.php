@@ -28,32 +28,45 @@ $pseudodispo = true;
 
 <body>
     <?php
-    if (isset($_POST['username']) && $_POST['username'] != $_SESSION['username']) { //Verif des données modifiées une à une
-        $verifusername = $bdd->query("SELECT username FROM account");
-        while ($username = $verifusername->fetch()) {
-            if ($_POST['username'] == $username['username']) {
-                $pseudodispo = false;
+    $carac_alphanumérique = "#^[a-z0-9áàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ]{2,40}$#i";
+    if (isset($_POST['username']) && $_POST['username'] != $_SESSION['username']) {
+        if (preg_match($carac_alphanumérique, $_POST['username'])) { //Verif des données modifiées une à une
+            $verifusername = $bdd->query("SELECT username FROM account");
+            while ($username = $verifusername->fetch()) {
+                if ($_POST['username'] == $username['username']) {
+                    $pseudodispo = false;
+                }
             }
-        }
-        if ($pseudodispo) {
-            $champmodifié = "username";
-            modifusername($bdd, $_POST['username'], $currentuser['id_user']);
-            $_SESSION['username'] = $_POST['username'];
-            $currentuser = log_user($bdd, $_SESSION['username']);
-            $modif = true;
+            if ($pseudodispo) {
+                $champmodifié = "username";
+                modifusername($bdd, $_POST['username'], $currentuser['id_user']);
+                $_SESSION['username'] = $_POST['username'];
+                $currentuser = log_user($bdd, $_SESSION['username']);
+                $modif = true;
+            }
+        } else {
+            $erromessage = "<p class='info_form'>Pseudo non conformes. Il doit contenir seulement des caractères alphanumériques(Au moins 2)</p>";
         }
     }
     if (isset($_POST['firstname']) &&  $_POST['firstname'] != $currentuser['nom']) {
-        $champmodifié = "nom";
-        modifnom($bdd, $_POST['firstname'], $currentuser['id_user']);
-        $currentuser = log_user($bdd, $_SESSION['username']);
-        $modif = true;
+        if (preg_match($carac_alphanumérique, $_POST['firstname'])) {
+            $champmodifié = "nom";
+            modifnom($bdd, $_POST['firstname'], $currentuser['id_user']);
+            $currentuser = log_user($bdd, $_SESSION['username']);
+            $modif = true;
+        } else {
+            $erromessage = "<p class='info_form'>Prénom non conforme</p>";
+        }
     }
     if (isset($_POST['secondname']) && $_POST['secondname'] != $currentuser['prenom']) {
-        $champmodifié = "prenom";
-        modifprenom($bdd, $_POST['secondname'], $currentuser['id_user']);
-        $currentuser = log_user($bdd, $_SESSION['username']);
-        $modif = true;
+        if (preg_match($carac_alphanumérique, $_POST['secondname'])) {
+            $champmodifié = "prenom";
+            modifprenom($bdd, $_POST['secondname'], $currentuser['id_user']);
+            $currentuser = log_user($bdd, $_SESSION['username']);
+            $modif = true;
+        } else {
+            $erromessage = "<p class='info_form'>Nom non conforme</p>";
+        }
     }
     if (isset($_POST['pass']) && preg_match("#.{4,}#", $_POST['pass'])) {
         if ($_POST['pass'] == $_POST['conf_pass']) {
@@ -87,14 +100,17 @@ $pseudodispo = true;
                                         }
                                         if (!$pseudodispo) {
                                             echo "<br><p class=info_form>Pseudo indisponible</p>";
+                                        }
+                                        if (isset($erromessage)) {
+                                            echo $erromessage;
                                         } ?>
         <form action="profilpage.php" method="POST" class="profil_form">
             <div class="profil_nom_champ">
                 <label for="identifiant">Pseudonyme</label><br>
                 <label for="new_password" style="margin-top:0.25rem;">Nouveau mot de passe</label><br>
                 <label for="confirm_password">Confirmer le mot de passe</label><br>
-                <label for="nom" style="margin-top: 0.4rem">Nom</label><br>
-                <label for="prenom">Prénom</label><br>
+                <label for="prenom" style="margin-top: 0.4rem">Prénom</label><br>
+                <label for="nom">Nom</label><br>
             </div>
             <div class="profil_champ">
                 <input type="text" name="username" id="identifiant" value="<?php echo htmlspecialchars($currentuser['username']); ?>"><br>
