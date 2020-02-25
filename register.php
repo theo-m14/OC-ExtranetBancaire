@@ -28,7 +28,7 @@ $pseudo_dispo = true;
         if ($_POST['pass'] == $_POST['conf_pass'] && preg_match("#.{4,}#", $_POST['pass'])) {  //Verif si les deux pass sont identiques
             if (preg_match($carac_alphanumérique, $_POST['register_login'])) {
                 if (preg_match($carac_alphanumérique, $_POST['firstname']) && preg_match($carac_alphanumérique, $_POST['secondname'])) {
-                    if (preg_match($carac_alphanumérique, $_POST['secur_response'])) {
+                    if (preg_match("#^[a-z0-9áàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ ]{2,40}$#i", $_POST['secur_response'])) {
                         while ($username = $verif_username->fetch()) {
                             if ($username['username'] == $_POST['register_login']) {
                                 echo "<p class='info_form'>Pseudo indisponible</p>"; //Verif du pseudo disponible
