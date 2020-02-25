@@ -1,6 +1,6 @@
 <div class="header">
 	<div class="divlogo_gbaf">
-		<a href="index.php"><img src="./public/img/gbaf.png" class="logo_gbaf"></a>
+		<a href="index.php"><img src="./public/img/gbaf.png" class="logo_gbaf" alt="gbafthumbnail"></a>
 	</div>
 	<div class="user_spec">
 		<?php if (isset($_SESSION['username'])) {
