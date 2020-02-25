@@ -38,7 +38,7 @@ function currentactor($bdd, $acteur_id)
 
 function catchactorpost($bdd, $acteur_id)
 {
-    $allactorpost = $bdd->query("SELECT p.date_add date_add, p.post post, a.prenom prenom
+    $allactorpost = $bdd->query("SELECT DATE_FORMAT(p.date_add, '%d/%m/%Y') date_add, p.post post, a.prenom prenom
                                 FROM post p
                                 LEFT JOIN account a
                                 ON p.id_user=a.id_user
